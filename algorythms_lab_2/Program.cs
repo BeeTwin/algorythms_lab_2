@@ -6,6 +6,10 @@ namespace algorythms_lab_2
     {
         static void Main(string[] args)
         {
+            var t = new TxtStackExecutor();
+            t.Append("input1.txt");
+            t.Append("input1.txt");
+            t.Execute();
             var s = new Stack<int>();
             s.Any();
             s.Push(1);

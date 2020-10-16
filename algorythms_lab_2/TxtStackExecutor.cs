@@ -19,6 +19,8 @@ namespace algorythms_lab_2
                 StackAction = stackAction;
                 Value = value;
             }
+
+            public override string ToString() => $"{StackAction}({Value})";
         }
 
         private enum StackAction
@@ -60,7 +62,7 @@ namespace algorythms_lab_2
             _dict[StackAction.ToString] = (_)     => _stack.ToString();
         }
 
-        private List<ParseItem> Parse(string path)
+        private List<ParseItem> Parse(string path) //input is always in right form ;)
         {
             var list = new List<ParseItem>();
             var input = File.ReadAllText(path).Split(' ');
