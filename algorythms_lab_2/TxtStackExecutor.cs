@@ -7,12 +7,18 @@ using System.Text;
 
 namespace algorythms_lab_2
 {
-    public class TxtStackExecutor<T>
+    public class TxtStackExecutor
     {
         private class ParseItem
         {
             public StackAction StackAction;
-            public T Value;
+            public string Value;
+
+            public ParseItem(StackAction stackAction, string value = null)
+            {
+                StackAction = stackAction;
+                Value = value;
+            }
         }
 
         private enum StackAction
@@ -23,10 +29,10 @@ namespace algorythms_lab_2
             Any,
             ToString
         }
-
-        private Stack<T> _stack = new Stack<T>();
+         
+        private Stack<string> _stack = new Stack<string>();
         private List<ParseItem> _parseItems = new List<ParseItem>();
-        private Dictionary<StackAction, Action<T>> _dict;
+        private Dictionary<StackAction, Action<string>> _dict;
 
         public TxtStackExecutor()
         {
@@ -46,7 +52,7 @@ namespace algorythms_lab_2
 
         private void Initialize()
         {
-            _dict = new Dictionary<StackAction, Action<T>>();
+            _dict = new Dictionary<StackAction, Action<string>>();
             _dict[StackAction.Push]     = (value) => _stack.Push(value);
             _dict[StackAction.Pop]      = (_)     => _stack.Pop();
             _dict[StackAction.Peek]     = (_)     => _stack.Peek();
@@ -56,7 +62,14 @@ namespace algorythms_lab_2
 
         private List<ParseItem> Parse(string path)
         {
-            return null;
+            var list = new List<ParseItem>();
+            var input = File.ReadAllText(path).Split(' ');
+            foreach(var stackAction in input)
+                if (stackAction.Contains(','))
+                    list.Add(new ParseItem(StackAction.Push, stackAction.Split(',')[1]));
+                else
+                    list.Add(new ParseItem(Enum.Parse<StackAction>(stackAction)));
+            return list;
         }
     }
 }
