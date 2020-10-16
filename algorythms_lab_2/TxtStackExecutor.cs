@@ -51,7 +51,7 @@ namespace algorythms_lab_2
             _dict[StackAction.Pop]      = (_)     => _stack.Pop();
             _dict[StackAction.Peek]     = (_)     => _stack.Peek();
             _dict[StackAction.Any]      = (_)     => _stack.Any();
-            _dict[StackAction.ToString] = (_)     => Console.WriteLine(_stack);
+            _dict[StackAction.ToString] = (_)     => _stack.ToString();
         }
 
         private List<ParseItem> Parse(string path)
