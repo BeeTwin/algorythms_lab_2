@@ -7,9 +7,13 @@ namespace algorythms_lab_2
         static void Main(string[] args)
         {
             var t = new TxtStackExecutor();
-            t.Append("input1.txt");
-            t.Append("input1.txt");
-            t.Execute();
+            //t.Append("input1.txt");
+            //t.Append("input1.txt");
+            var g = new TimeAnalizer();
+            g.Actions += () => t.Append("input1.txt");
+            g.Actions += () => t.Execute();
+            g.Analyze();
+
             var s = new Stack<int>();
             s.Any();
             s.Push(1);
