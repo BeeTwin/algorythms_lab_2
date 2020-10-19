@@ -13,7 +13,8 @@ namespace algorythms_lab_2
             g.Actions += () => t.Append("input1.txt");
             g.Actions += () => t.Execute();
             g.Analyze();
-
+            var asd = new StackCalculator("input2.txt");
+            var asdd = asd.Execute();
             var s = new Stack<int>();
             s.Any();
             s.Push(1);

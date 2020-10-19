@@ -38,7 +38,7 @@ namespace algorythms_lab_2
 
         public TxtStackExecutor()
         {
-            Initialize();
+            InitializeDict();
         }
 
         public void Append(string path)
@@ -52,7 +52,7 @@ namespace algorythms_lab_2
                 _dict[parseItem.StackAction](parseItem.Value);
         }
 
-        private void Initialize()
+        private void InitializeDict()
         {
             _dict = new Dictionary<StackAction, Action<string>>();
             _dict[StackAction.Push]     = (value) => _stack.Push(value);
