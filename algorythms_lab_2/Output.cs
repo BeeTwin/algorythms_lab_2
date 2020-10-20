@@ -68,7 +68,7 @@ namespace algorythms_lab_2
             WriteLine($"\t{path}");
             var c = new StackCalculator(path);
             WriteLine("Infix form:");
-            WriteLine($"\t{c}");
+            WriteLine($"\t{c.}");
 
         }
 
