@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using static System.Math;
 
@@ -9,6 +10,7 @@ namespace algorythms_lab_2
     {
         public Stack<string> Stack;
         public Dictionary<string, double> Variables;
+        public string InfixForm { get => _input[0]; }
 
         private Dictionary<string, Func<double, double, double>> _dict;
         private Dictionary<string, byte> _priorities;
