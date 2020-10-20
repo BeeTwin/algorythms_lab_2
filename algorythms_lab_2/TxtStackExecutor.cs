@@ -48,8 +48,8 @@ namespace algorythms_lab_2
 
         public void Execute()
         {
-            foreach(var parseItem in _parseItems)
-                _dict[parseItem.StackAction](parseItem.Value);
+            foreach (var parseItem in _parseItems)
+                _dict[parseItem.StackAction](parseItem.Value); //CWL(_stack);
         }
 
         private void InitializeDict()
