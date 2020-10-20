@@ -63,13 +63,18 @@ namespace algorythms_lab_2
 
         public void SecondPath()
         {
-            WriteLine("File name:");
+            Write("File name: ");
             var path = ReadLine();
             WriteLine($"\t{path}");
             var c = new StackCalculator(path);
             WriteLine("Infix form:");
-            WriteLine($"\t{c.}");
-
+            WriteLine($"\t{c.InfixForm}");
+            WriteLine("Postfix form:");
+            WriteLine($"\t{c.Stack}");
+            WriteLine("Variables:");
+            foreach(var v in c.Variables)
+                WriteLine($"\t {v.Key} = {v.Value}");
+            WriteLine($"Result: {c.Execute()}");
         }
 
 

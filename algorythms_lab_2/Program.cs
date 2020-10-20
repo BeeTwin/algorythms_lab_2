@@ -7,6 +7,7 @@ namespace algorythms_lab_2
     {
         static void Main(string[] args)
         {
+            Clear();
             WriteLine("Tap 1 or 2");
             WriteLine("1 - First part");
             WriteLine("2 - Second part");
@@ -23,7 +24,8 @@ namespace algorythms_lab_2
                     output.SecondPath();
                     break;
             }
-
+            if (ReadKey().Key == ConsoleKey.Escape)
+                Main(new string[] { });
 
             /*var t = new TxtStackExecutor();
             t.Append("input1_1.txt");

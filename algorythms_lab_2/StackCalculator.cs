@@ -50,7 +50,7 @@ namespace algorythms_lab_2
                 var nameAndValue = _input[i].Split('=');
                 var name = nameAndValue[0].Trim(); 
                 var value = nameAndValue[1].Trim();
-                Variables[name] = double.Parse(value);
+                Variables[name] = double.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
             }
         }
 
@@ -65,8 +65,7 @@ namespace algorythms_lab_2
                 var current = splittedInput[i];
                 if (_dict.ContainsKey(current))
                 {
-                    if (opStack.Any() && _priorities[opStack.Peek()] > _priorities[current])
-                        result.Push(opStack.Pop());
+                    Check(opStack, result, current);
                     opStack.Push(current);
                 }
                 else if (current == "(")
@@ -82,6 +81,15 @@ namespace algorythms_lab_2
             EmptyOpStack(opStack, result);
 
             return result.Reverse();
+        }
+
+        private void Check(Stack<string> opStack, Stack<string> result, string current)
+        {
+            if (opStack.Any() && _priorities[opStack.Peek()] >= _priorities[current])
+            {
+                result.Push(opStack.Pop());
+                Check(opStack, result, current);
+            }
         }
 
         private void EmptyOpStack(Stack<string> opStack, Stack<string> result)
