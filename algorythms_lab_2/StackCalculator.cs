@@ -19,28 +19,37 @@ namespace algorythms_lab_2
             InitializeDict();
             _input = File.ReadAllLines(path);
             Stack = ChangeToPrefix(_input[0]);
-            Variables = InitializeVariables(_input);
+            InitializeVariables(_input);
         }
 
         public double Execute()
         {
-            while (true)
-            {
+            var opStack = new Stack<double>();
+            string current;
+            while (Stack.Any())
+                if (_dict.ContainsKey(current = Stack.Pop()))
+                    opStack.Push(_dict[current](
+                        opStack.Pop(), 
+                        IsBinary(current) ? opStack.Pop() : -1));
+                else
+                    opStack.Push(
+                        Variables.ContainsKey(current) ? 
+                        Variables[current] : 
+                        double.Parse(current, System.Globalization.CultureInfo.InvariantCulture));
 
-            }
+            return opStack.Pop();
         }
 
-        private Dictionary<string, double> InitializeVariables(string[] input)
+        private void InitializeVariables(string[] input)
         {
-            var output = new Dictionary<string, double>();
+            Variables = new Dictionary<string, double>();
             for(var i = 1; i < _input.Length; i++)
             {
                 var nameAndValue = _input[i].Split('=');
                 var name = nameAndValue[0].Trim(); 
                 var value = nameAndValue[1].Trim();
-                output[name] = int.Parse(value);
+                Variables[name] = double.Parse(value);
             }
-            return output;
         }
 
         private Stack<string> ChangeToPrefix(string input)
@@ -70,7 +79,7 @@ namespace algorythms_lab_2
             }
             EmptyOpStack(opStack, result);
 
-            return result;
+            return result.Reverse();
         }
 
         private void EmptyOpStack(Stack<string> opStack, Stack<string> result)
@@ -83,16 +92,27 @@ namespace algorythms_lab_2
         {
             _dict = new Dictionary<string, Func<double, double, double>>();
             _priorities = new Dictionary<string, byte>();
-            _dict["+"]    = (a, b) => a + b;        _priorities["+"]    = 1;
-            _dict["-"]    = (a, b) => a - b;        _priorities["-"]    = 1;
-            _dict["*"]    = (a, b) => a * b;        _priorities["*"]    = 2;
-            _dict["/"]    = (a, b) => a / b;        _priorities["/"]    = 2;
-            _dict["^"]    = (a, b) => Pow(a, b);    _priorities["^"]    = 3;
-            _dict["ln"]   = (a, _) => Log(a);       _priorities["ln"]   = 3;
-            _dict["cos"]  = (a, _) => Cos(a);       _priorities["cos"]  = 3;
-            _dict["sin"]  = (a, _) => Sin(a);       _priorities["sin"]  = 3;
-            _dict["sqrt"] = (a, _) => Sqrt(a);      _priorities["sqrt"] = 3;
-            _priorities["("] = 0;
+            _dict["+"]    = (a, b) => b + a;        _priorities["+"]    = 1;
+            _dict["-"]    = (a, b) => b - a;        _priorities["-"]    = 1;
+            _dict["*"]    = (a, b) => b * a;        _priorities["*"]    = 2;
+            _dict["/"]    = (a, b) => b / a;        _priorities["/"]    = 2;
+            _dict["^"]    = (a, b) => Pow(b, a);    _priorities["^"]    = 3;
+            _dict["ln"]   = (a, b) => Log(a);       _priorities["ln"]   = 4;
+            _dict["cos"]  = (a, b) => Cos(a);       _priorities["cos"]  = 4;
+            _dict["sin"]  = (a, b) => Sin(a);       _priorities["sin"]  = 4;
+            _dict["sqrt"] = (a, b) => Sqrt(a);      _priorities["sqrt"] = 4;
+                                                    _priorities["("] = 0;
         }
+
+        private bool IsBinary(string op)
+            => op switch
+            {
+                "+" => true,
+                "-" => true,
+                "*" => true,
+                "/" => true,
+                "^" => true,
+                _   => false
+            };
     }
 }

@@ -49,6 +49,14 @@ namespace algorythms_lab_2
             return _top != null;
         }
 
+        public Stack<T> Reverse()
+        {
+            var result = new Stack<T>();
+            while (Any())
+                result.Push(Pop());
+            return result;
+        }
+
         public override string ToString() //Print()
         {
             var sb = new StringBuilder();
