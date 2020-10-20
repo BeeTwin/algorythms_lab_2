@@ -1,4 +1,5 @@
 ﻿using System;
+using static System.Console;
 
 namespace algorythms_lab_2
 {
@@ -6,8 +7,26 @@ namespace algorythms_lab_2
     {
         static void Main(string[] args)
         {
-            var t = new TxtStackExecutor();
-            t.Append("input1.txt");
+            WriteLine("Tap 1 or 2");
+            WriteLine("1 - First part");
+            WriteLine("2 - Second part");
+            var output = new Output();
+            var n = ReadKey().Key;
+            switch (n)
+            {
+                case ConsoleKey.D1:
+                    Clear();
+                    output.FirstPath();
+                    break;
+                case ConsoleKey.D2:
+                    Clear();
+                    output.SecondPath();
+                    break;
+            }
+
+
+            /*var t = new TxtStackExecutor();
+            t.Append("input1_1.txt");
             //t.Append("input1.txt");
             var g = new TimeAnalizer();
             g.Actions += () => t.Append("input1.txt");
@@ -28,7 +47,7 @@ namespace algorythms_lab_2
             s.Push(5);
             s.Push(6);
             var b = s.Pop();
-            Console.WriteLine(s);
+            Console.WriteLine(s);*/
 
         }
     }
