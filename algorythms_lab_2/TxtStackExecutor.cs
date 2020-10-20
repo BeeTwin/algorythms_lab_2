@@ -73,5 +73,14 @@ namespace algorythms_lab_2
                     list.Add(new ParseItem(Enum.Parse<StackAction>(stackAction)));
             return list;
         }
+
+        public override string ToString() 
+        {
+            var sb = new StringBuilder();
+            foreach (var item in _parseItems)
+                sb.Append($"{item}, ");
+            sb.Remove(sb.Length - 2, 2);
+            return sb.ToString();
+        }
     }
 }
