@@ -50,7 +50,6 @@ namespace algorythms_lab_2
         {
             foreach(var parseItem in _parseItems)
                 _dict[parseItem.StackAction](parseItem.Value);
-            _stack = new Stack<string>();
         }
 
         private void InitializeDict()

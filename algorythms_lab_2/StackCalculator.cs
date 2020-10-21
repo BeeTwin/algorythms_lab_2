@@ -20,7 +20,7 @@ namespace algorythms_lab_2
         {
             InitializeDict();
             _input = File.ReadAllLines(path);
-            Stack = ChangeToPrefix(_input[0]);
+            Stack = ChangeToPostfix(_input[0]);
             InitializeVariables(_input);
         }
 
@@ -32,7 +32,7 @@ namespace algorythms_lab_2
                 if (_dict.ContainsKey(current = Stack.Pop()))
                     opStack.Push(_dict[current](
                         opStack.Pop(), 
-                        IsBinary(current) ? opStack.Pop() : -1));
+                        IsBinary(current) ? opStack.Pop() : 0));
                 else
                     opStack.Push(
                         Variables.ContainsKey(current) ? 
@@ -54,7 +54,7 @@ namespace algorythms_lab_2
             }
         }
 
-        private Stack<string> ChangeToPrefix(string input)
+        private Stack<string> ChangeToPostfix(string input)
         {
             var splittedInput = input.Split(' ');
             var opStack = new Stack<string>();
